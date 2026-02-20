@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership — APEX GYM</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .toggle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: center;
+      margin: 40px 0 60px;
+    }
+
+    .toggle-label {
+      font-family: var(--font-cond);
+      font-size: .85rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .toggle-label.active {
+      color: var(--white);
+    }
+
+    .switch {
+      position: relative;
+      width: 52px;
+      height: 28px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
+      background: var(--steel2);
+      border-radius: 28px;
+      transition: background .3s;
+    }
+
+    .slider::before {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 3px;
+      width: 22px;
+      height: 22px;
+      background: var(--ash);
+      border-radius: 50%;
+      transition: transform .3s var(--ease-snap);
+    }
+
+    input:checked+.slider {
+      background: var(--acid);
+    }
+
+    input:checked+.slider::before {
+      transform: translateX(24px);
+      background: var(--black);
+    }
+
+    .save-badge {
+      background: var(--acid);
+      color: var(--black);
+      font-family: var(--font-cond);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .plan-price-val {
+      display: inline-block;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 80px;
+    }
+
+    .compare-table th,
+    .compare-table td {
+      padding: 16px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--steel);
+    }
+
+    .compare-table th:first-child,
+    .compare-table td:first-child {
+      text-align: left;
+    }
+
+    .compare-table th {
+      font-family: var(--font-cond);
+      font-size: .75rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 2px solid var(--steel2);
+    }
+
+    .compare-table th.featured-col {
+      color: var(--acid);
+    }
+
+    .compare-table tr:hover td {
+      background: var(--surface2);
+    }
+
+    .compare-table td {
+      font-size: .88rem;
+      color: var(--ash);
+    }
+
+    .check-yes {
+      color: var(--acid);
+      font-size: 1.1rem;
+    }
+
+    .check-no {
+      color: var(--muted2);
+      font-size: 1.1rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--steel);
+    }
+
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      cursor: pointer;
+      font-family: var(--font-cond);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      color: var(--ash);
+      transition: color .2s;
+    }
+
+    .faq-q:hover {
+      color: var(--white);
+    }
+
+    .faq-icon {
+      font-size: 1.2rem;
+      color: var(--acid);
+      transition: transform .3s var(--ease-explosive);
+      flex-shrink: 0;
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s var(--ease-explosive);
+    }
+
+    .faq-a p {
+      padding-bottom: 20px;
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    @media (max-width: 768px) {
+
+      .compare-table th,
+      .compare-table td {
+        padding: 12px 10px;
+        font-size: 0.75rem;
+      }
+
+      .faq-q {
+        padding: 20px 0;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+  <div class="mobile-menu">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a>
+    <a href="trainers.html">Trainers</a><a href="membership.html">Membership</a>
+    <a href="gallery.html">Gallery</a><a href="contact.html">Contact</a><a href="join.html">Join Now</a>
+  </div>
+  <nav>
+    <a href="index.html" class="nav-logo">APE<span>X</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="trainers.html">Trainers</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="join.html" class="nav-cta magnetic">Join Now</a>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-grid"></div>
+    <span class="page-hero-num">05</span>
+    <div class="container page-hero-content">
+      <p>Choose Your Path</p>
+      <h1>MEMBERSHIP<br>PLANS</h1>
+    </div>
+  </div>
+
+  <section class="section-pad" style="background: var(--black);">
+    <div class="container">
+      <div class="section-label reveal" style="justify-content:center;">Pricing</div>
+      <h2 class="section-title reveal reveal-delay-1" style="text-align:center;">INVEST IN YOUR<br>TRANSFORMATION</h2>
+      <div class="toggle-wrap reveal reveal-delay-2">
+        <span class="toggle-label active" id="lbl-monthly">Monthly</span>
+        <label class="switch">
+          <input type="checkbox" class="plan-toggle" data-monthly="59,99,179" data-annual="49,79,149">
+          <span class="slider"></span>
+        </label>
+        <span class="toggle-label" id="lbl-annual">Annual <span class="save-badge">Save 20%</span></span>
+      </div>
+      <div class="plans-grid">
+        <!-- STARTER -->
+        <div class="plan-card reveal">
+          <div class="plan-name">Starter</div>
+          <div class="plan-price"><sup>$</sup><span class="plan-price-val">59</span><span>/mo</span></div>
+          <div class="plan-period">per month, billed monthly</div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span>Full Gym Access</li>
+            <li><span class="check">✓</span>Group Classes (5/mo)</li>
+            <li><span class="check">✓</span>Locker Room Access</li>
+            <li><span class="check">✓</span>Member App Access</li>
+            <li class="disabled"><span class="check">—</span>Personal Training</li>
+            <li class="disabled"><span class="check">—</span>Nutrition Coaching</li>
+            <li class="disabled"><span class="check">—</span>Recovery Lounge</li>
+            <li class="disabled"><span class="check">—</span>Guest Passes</li>
+          </ul>
+          <a href="join.html" class="btn-outline" style="width:100%;text-align:center;justify-content:center;">Get
+            Started</a>
+        </div>
+        <!-- PERFORMANCE (FEATURED) -->
+        <div class="plan-card featured reveal reveal-delay-2">
+          <div class="plan-badge">Most Popular</div>
+          <div class="plan-name">Performance</div>
+          <div class="plan-price"><sup>$</sup><span class="plan-price-val">99</span><span>/mo</span></div>
+          <div class="plan-period">per month, billed monthly</div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span>Full Gym Access</li>
+            <li><span class="check">✓</span>Unlimited Group Classes</li>
+            <li><span class="check">✓</span>Locker Room Access</li>
+            <li><span class="check">✓</span>Member App Access</li>
+            <li><span class="check">✓</span>2 PT Sessions/month</li>
+            <li><span class="check">✓</span>Nutrition Check-in</li>
+            <li><span class="check">✓</span>Recovery Lounge Access</li>
+            <li class="disabled"><span class="check">—</span>Guest Passes</li>
+          </ul>
+          <a href="join.html" class="btn-primary" style="width:100%;text-align:center;justify-content:center;">Get
+            Started <span class="arrow-icon">→</span></a>
+        </div>
+        <!-- ELITE -->
+        <div class="plan-card reveal reveal-delay-3">
+          <div class="plan-name">Elite</div>
+          <div class="plan-price"><sup>$</sup><span class="plan-price-val">179</span><span>/mo</span></div>
+          <div class="plan-period">per month, billed monthly</div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span>Full Gym Access (24/7)</li>
+            <li><span class="check">✓</span>Unlimited Group Classes</li>
+            <li><span class="check">✓</span>Premium Locker</li>
+            <li><span class="check">✓</span>Member App + Analytics</li>
+            <li><span class="check">✓</span>8 PT Sessions/month</li>
+            <li><span class="check">✓</span>Full Nutrition Coaching</li>
+            <li><span class="check">✓</span>Recovery Lounge (Unlimited)</li>
+            <li><span class="check">✓</span>4 Guest Passes/month</li>
+          </ul>
+          <a href="join.html" class="btn-outline" style="width:100%;text-align:center;justify-content:center;">Get
+            Started</a>
+        </div>
+      </div>
+
+      <!-- COMPARISON TABLE -->
+      <div style="overflow-x:auto;">
+        <table class="compare-table reveal">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Starter</th>
+              <th class="featured-col">Performance</th>
+              <th>Elite</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Full Gym Access</td>
+              <td><span class="check-yes">✓</span></td>
+              <td><span class="check-yes">✓</span></td>
+              <td><span class="check-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>24/7 Access</td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>Group Classes</td>
+              <td>5 / month</td>
+              <td>Unlimited</td>
+              <td>Unlimited</td>
+            </tr>
+            <tr>
+              <td>Personal Training</td>
+              <td><span class="check-no">—</span></td>
+              <td>2 / month</td>
+              <td>8 / month</td>
+            </tr>
+            <tr>
+              <td>Nutrition Coaching</td>
+              <td><span class="check-no">—</span></td>
+              <td>Monthly check-in</td>
+              <td>Full program</td>
+            </tr>
+            <tr>
+              <td>Recovery Lounge</td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-yes">✓</span></td>
+              <td>Unlimited</td>
+            </tr>
+            <tr>
+              <td>Guest Passes</td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-no">—</span></td>
+              <td>4 / month</td>
+            </tr>
+            <tr>
+              <td>App Analytics</td>
+              <td>Basic</td>
+              <td>Advanced</td>
+              <td>Full Suite</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- FAQ -->
+      <div style="margin-top: 100px;">
+        <div class="section-label reveal">FAQ</div>
+        <h2 class="section-title reveal reveal-delay-1" style="margin-bottom: 48px;">QUESTIONS?<br>WE GOT ANSWERS.</h2>
+        <div class="faq-list">
+          <div class="faq-item reveal">
+            <div class="faq-q">Is there a joining fee?<span class="faq-icon">+</span></div>
+            <div class="faq-a">
+              <p>There is no joining fee for any plan. We believe in transparent pricing. What you see is what you pay,
+                period.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal reveal-delay-1">
+            <div class="faq-q">Can I cancel anytime?<span class="faq-icon">+</span></div>
+            <div class="faq-a">
+              <p>Monthly plans can be cancelled at any time with 30 days notice. Annual plans include a pro-rated refund
+                if cancelled after 90 days.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal reveal-delay-2">
+            <div class="faq-q">Do you offer corporate memberships?<span class="faq-icon">+</span></div>
+            <div class="faq-a">
+              <p>Yes! We offer group corporate plans for 5+ employees with discounts up to 30%. Contact our team to set
+                up a custom quote.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <div class="faq-q">What if I want to upgrade my plan?<span class="faq-icon">+</span></div>
+            <div class="faq-a">
+              <p>Plan upgrades take effect immediately. Your billing will be pro-rated and you'll only pay the
+                difference for the remaining days of your current cycle.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal reveal-delay-1">
+            <div class="faq-q">Is there a free trial?<span class="faq-icon">+</span></div>
+            <div class="faq-a">
+              <p>Yes — we offer a 7-day free trial for new members on any plan. No credit card required. Visit our Join
+                page to claim yours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">APE<span style="color:var(--acid)">X</span></div>
+          <p style="margin-top:16px">Invest in yourself. The returns are limitless.</p>
+          <div class="social-links" style="margin-top:24px"><a href="#" class="social-link">IG</a><a href="#"
+              class="social-link">YT</a><a href="#" class="social-link">TW</a></div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="trainers.html">Trainers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Membership</h4>
+          <ul>
+            <li><a href="membership.html">Plans</a></li>
+            <li><a href="join.html">Free Trial</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#">14 Iron Street</a></li>
+            <li><a href="tel:+15551234567">+1 555 123 4567</a></li>
+            <li><a href="#">Mon–Sun: 5AM–11PM</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Apex Performance Club. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.closest('.faq-item');
+        const a = item.querySelector('.faq-a');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-a').style.maxHeight = '0';
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          a.style.maxHeight = a.scrollHeight + 'px';
+        }
+      });
+    });
+    // Toggle label update
+    const toggle = document.querySelector('.plan-toggle');
+    const lblM = document.getElementById('lbl-monthly');
+    const lblA = document.getElementById('lbl-annual');
+    if (toggle) {
+      toggle.addEventListener('change', () => {
+        lblM.classList.toggle('active', !toggle.checked);
+        lblA.classList.toggle('active', toggle.checked);
+      });
+    }
+  </script>
+</body>
+
+</html>

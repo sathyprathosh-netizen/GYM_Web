@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — APEX GYM</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .gallery-full {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .gallery-full .gallery-item:nth-child(1) {
+      grid-column: span 2;
+      grid-row: span 2;
+      aspect-ratio: unset;
+    }
+
+    .gallery-full .gallery-item:not(:nth-child(1)) {
+      aspect-ratio: 1;
+    }
+
+    @media (min-width: 901px) {
+      .gallery-span-2 {
+        grid-column: span 2;
+        aspect-ratio: unset !important;
+      }
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--steel);
+      border-radius: 4px;
+      padding: 32px 28px;
+      transition: border-color .3s, transform .4s var(--ease-explosive);
+    }
+
+    .testimonial-card:hover {
+      border-color: var(--acid);
+      transform: translateY(-6px);
+    }
+
+    .stars {
+      color: var(--acid);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-card p {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.8;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--steel2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-family: var(--font-cond);
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      color: var(--white);
+    }
+
+    .author-meta {
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    .ba-section {
+      background: var(--deep);
+    }
+
+    @media(max-width:900px) {
+      .gallery-full {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-full .gallery-item:nth-child(1) {
+        grid-column: span 2;
+        grid-row: 1;
+        aspect-ratio: 16/9;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media(max-width:600px) {
+      .gallery-full {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-full .gallery-item:nth-child(1) {
+        grid-column: 1;
+      }
+    }
+
+    /* Emoji Slider Styles */
+    .ba-emoji {
+      font-size: 15vw;
+      line-height: 1;
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+  <div class="mobile-menu">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a>
+    <a href="trainers.html">Trainers</a><a href="membership.html">Membership</a>
+    <a href="gallery.html">Gallery</a><a href="contact.html">Contact</a><a href="join.html">Join Now</a>
+  </div>
+  <nav>
+    <a href="index.html" class="nav-logo">APE<span>X</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="trainers.html">Trainers</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="join.html" class="nav-cta magnetic">Join Now</a>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-grid"></div>
+    <span class="page-hero-num">06</span>
+    <div class="container page-hero-content">
+      <p>Proof of Work</p>
+      <h1>TRANSFORMATION<br>GALLERY</h1>
+    </div>
+  </div>
+
+  <!-- MAIN GALLERY GRID -->
+  <section class="section-pad" style="background: var(--black);">
+    <div class="container">
+      <div class="section-label reveal">The Facility</div>
+      <h2 class="section-title reveal reveal-delay-1" style="margin-bottom: 48px;">WHERE<br>LEGENDS TRAIN</h2>
+      <div class="gallery-full">
+        <div class="gallery-item reveal" data-lightbox="Main Training Floor">
+          <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2070&auto=format&fit=crop"
+            alt="Main Training Floor" class="img-fill">
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-icon">⊕</div>
+            <div class="gallery-label">Main Training Floor</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal" data-lightbox="CrossFit Zone">
+          <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=2074&auto=format&fit=crop"
+            alt="CrossFit Zone" class="img-fill">
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-icon">⊕</div>
+            <div class="gallery-label">CrossFit Zone</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal reveal-delay-1" data-lightbox="Recovery Lounge">
+          <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?q=80&w=2070&auto=format&fit=crop"
+            alt="Recovery Lounge" class="img-fill">
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-icon">⊕</div>
+            <div class="gallery-label">Recovery Lounge</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal" data-lightbox="Olympic Platform">
+          <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop"
+            alt="Olympic Platform" class="img-fill">
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-icon">⊕</div>
+            <div class="gallery-label">Olympic Platform</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal reveal-delay-1" data-lightbox="Yoga Studio">
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2020&auto=format&fit=crop"
+            alt="Yoga Studio" class="img-fill">
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-icon">⊕</div>
+            <div class="gallery-label">Yoga Studio</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal reveal-delay-2" data-lightbox="Cardio Deck">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2102&auto=format&fit=crop"
+            alt="Cardio Deck" class="img-fill">
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-icon">⊕</div>
+            <div class="gallery-label">Cardio Deck</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal reveal-delay-2" data-lightbox="Combat Studio">
+          <img src="https://images.unsplash.com/photo-1595078475328-1ab05d0a6a0e?q=80&w=2070&auto=format&fit=crop"
+            alt="Combat Studio" class="img-fill">
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-icon">⊕</div>
+            <div class="gallery-label">Combat Studio</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal gallery-span-2" data-lightbox="Nutrition Bar">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2070&auto=format&fit=crop"
+            alt="Nutrition Bar" class="img-fill">
+          <div class="gallery-overlay">
+            <div class="gallery-overlay-icon">⊕</div>
+            <div class="gallery-label">Nutrition Bar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE/AFTER SLIDER -->
+  </div>
+  </section>
+  <div class="container">
+    <div class="section-label reveal" style="justify-content:center;">Transformations</div>
+    <h2 class="section-title reveal reveal-delay-1" style="text-align:center;margin-bottom:12px;">REAL
+      RESULTS,<br>REAL PEOPLE</h2>
+    <p class="reveal reveal-delay-2"
+      style="text-align:center;color:var(--muted);max-width:480px;margin:0 auto 48px;font-size:.9rem;">Drag the slider
+      to see the difference Apex makes. These are real members who committed, trained, and transformed.</p>
+    <div class="ba-container reveal" style="max-width:800px;">
+      <div class="ba-before">
+        <div class="ba-emoji">😔</div>
+        <div style="text-align:center;pointer-events:none;position:relative;z-index:2;">
+          <p
+            style="font-family:var(--font-cond);font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:rgba(0,0,0,0.4);padding:4px 12px;display:inline-block;">
+            Week 1</p>
+        </div>
+      </div>
+      <div class="ba-after">
+        <div class="ba-emoji">💪</div>
+        <div style="text-align:center;pointer-events:none;position:relative;z-index:2;">
+          <p
+            style="font-family:var(--font-cond);font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acid);background:rgba(0,0,0,0.6);padding:4px 12px;display:inline-block;">
+            Week 12</p>
+        </div>
+      </div>
+      <div class="ba-handle">
+        <button class="ba-handle-btn" aria-label="Drag to compare">⇄</button>
+      </div>
+      <div class="ba-label before-lbl">BEFORE</div>
+      <div class="ba-label after-lbl">AFTER</div>
+    </div>
+    <p
+      style="text-align:center;font-family:var(--font-cond);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted2);margin-top:20px;">
+      ← Drag to compare →</p>
+  </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section-pad" style="background: var(--black);">
+    <div class="container">
+      <div class="section-label reveal">Member Stories</div>
+      <h2 class="section-title reveal reveal-delay-1">WHAT THEY SAY<br>AFTER APEX</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>"I've been to a dozen gyms. Nothing comes close to Apex. The coaches actually care about your results, not
+            just your membership fee. Lost 22kg in 4 months."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">💪</div>
+            <div>
+              <div class="author-name">James T.</div>
+              <div class="author-meta">Member since 2023 · 22kg Lost</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="stars">★★★★★</div>
+          <p>"As a competitive runner, I needed strength work to stop getting injured. Marcus built me a program that
+            increased my squat 80kg and my race times dropped by 4 minutes."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">🏃</div>
+            <div>
+              <div class="author-name">Priya M.</div>
+              <div class="author-meta">Member since 2022 · Marathon Runner</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="stars">★★★★★</div>
+          <p>"The culture here is unlike anything I've experienced. Everyone's pushing each other. I didn't think I
+            could do a muscle-up. 6 weeks later, I did 10 in a row."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">🏋️</div>
+            <div>
+              <div class="author-name">Daniel K.</div>
+              <div class="author-meta">Member since 2024 · CrossFit</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>"Aria's mobility program fixed a 2-year shoulder injury that physiotherapy couldn't touch. I'm now training
+            harder than I did in my 20s. I'm 44."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">🧘</div>
+            <div>
+              <div class="author-name">Rebecca S.</div>
+              <div class="author-meta">Member since 2022 · Yoga Program</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="stars">★★★★★</div>
+          <p>"The nutrition coaching changed everything. I was training for years with no results. Leila fixed my diet
+            in 3 sessions and I've gained 8kg of lean muscle since."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">🥗</div>
+            <div>
+              <div class="author-name">Ahmed F.</div>
+              <div class="author-meta">Member since 2023 · Nutrition Client</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="stars">★★★★★</div>
+          <p>"Sofia's combat conditioning class is the hardest thing I've ever done. And I mean that as the highest
+            compliment. I'm fitter now than when I played professional football."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">🥊</div>
+            <div>
+              <div class="author-name">Carlos V.</div>
+              <div class="author-meta">Member since 2021 · Combat Class</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:60px;">
+        <a href="join.html" class="btn-primary magnetic">Write Your Story <span class="arrow-icon">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">APE<span style="color:var(--acid)">X</span></div>
+          <p style="margin-top:16px">12,000+ transformations and counting.</p>
+          <div class="social-links" style="margin-top:24px"><a href="#" class="social-link">IG</a><a href="#"
+              class="social-link">YT</a><a href="#" class="social-link">TW</a></div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="trainers.html">Trainers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Membership</h4>
+          <ul>
+            <li><a href="membership.html">Plans</a></li>
+            <li><a href="join.html">Free Trial</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#">14 Iron Street</a></li>
+            <li><a href="tel:+15551234567">+1 555 123 4567</a></li>
+            <li><a href="#">Mon–Sun: 5AM–11PM</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Apex Performance Club. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

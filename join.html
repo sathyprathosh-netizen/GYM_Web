@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Now — APEX GYM</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── JOIN PAGE ELITE STYLE SUITE ── */
+    :root {
+      --join-primary: var(--acid);
+      --join-surface: rgba(15, 15, 15, 0.6);
+    }
+
+    /* Balanced Grid - 50/50 parity */
+    .join-grid {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 80px !important;
+      align-items: stretch;
+      /* Stretch for vertical symmetry */
+    }
+
+    .join-header-centered {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 80px;
+    }
+
+    .join-header-centered .section-title {
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .join-form-wrapper {
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .join-form-wrapper .hud-box {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Perks & Steps Alignment Fix */
+    .join-perks {
+      margin: 40px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .perk {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      font-size: 1rem;
+      color: var(--white);
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .perk:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .perk-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      background: var(--acid-faint);
+      border: 1px solid rgba(181, 255, 46, .2);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--acid);
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .step {
+      display: flex;
+      gap: 24px;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .step:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .step-num {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      background: var(--black);
+      border: 2px solid var(--acid);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: var(--acid);
+      position: relative;
+      z-index: 1;
+    }
+
+    .step h4 {
+      font-family: var(--font-cond);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .step p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Countdown Styling - Perfect Aligment */
+    .countdown-wrap {
+      margin-top: 40px;
+      background: rgba(181, 255, 46, 0.02);
+      border: 1px solid rgba(181, 255, 46, 0.1);
+      padding: 24px;
+      border-radius: 4px;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .countdown-label {
+      font-family: var(--font-cond);
+      font-size: 0.7rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--acid);
+    }
+
+    .countdown {
+      display: flex !important;
+      gap: 24px !important;
+    }
+
+    .cd-block {
+      text-align: center;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      position: relative;
+      min-width: 80px;
+    }
+
+    .cd-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .cd-lbl {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* HUD Markers */
+    .hud-marker {
+      position: absolute;
+      font-family: monospace;
+      font-size: 0.6rem;
+      color: var(--acid);
+      opacity: 0.4;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    /* ── MOBILE ALIGNMENT OVERRIDES ── */
+    @media (max-width: 1024px) {
+      .join-grid {
+        grid-template-columns: 1fr !important;
+        gap: 60px !important;
+      }
+
+      .join-header-centered {
+        margin-bottom: 40px;
+      }
+
+      .join-form-wrapper {
+        margin-top: 0;
+      }
+
+      .countdown {
+        gap: 12px !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .countdown-wrap {
+        display: flex !important;
+        width: 100% !important;
+        align-items: center;
+        text-align: center;
+      }
+
+      .countdown {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        justify-items: center;
+        gap: 20px !important;
+        width: 100%;
+      }
+
+      .cd-block {
+        width: 100%;
+      }
+
+      .hud-box {
+        padding: 32px 20px !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+  <div class="mobile-menu">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a>
+    <a href="trainers.html">Trainers</a><a href="membership.html">Membership</a>
+    <a href="gallery.html">Gallery</a><a href="contact.html">Contact</a><a href="join.html">Join Now</a>
+  </div>
+  <nav>
+    <a href="index.html" class="nav-logo">APE<span>X</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="trainers.html">Trainers</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="join.html" class="nav-cta magnetic">Join Now</a>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-grid"></div>
+    <span class="page-hero-num">08</span>
+    <div class="container page-hero-content">
+      <p>Start Your Journey</p>
+      <h1>JOIN<br>APEX</h1>
+    </div>
+  </div>
+
+  <section class="section-pad" style="background: var(--black);">
+    <div class="container">
+      <!-- CENTERED HEADER -->
+      <div class="join-header-centered">
+        <div class="section-label reveal" style="justify-content: center;">Limited Offer</div>
+        <h2 class="section-title reveal reveal-delay-1"
+          style="font-size:clamp(2.5rem,6vw,4.5rem); margin-bottom: 24px;">
+          YOUR TRIAL<br>STARTS NOW</h2>
+        <p class="reveal reveal-delay-2"
+          style="color:var(--ash); font-size:1rem; line-height:1.8; margin: 0 auto; max-width:600px;">
+          7 full days of elite access. Every class, every trainer, every piece of equipment. Zero commitment. Zero
+          credit card.
+        </p>
+      </div>
+
+      <div class="join-grid">
+        <!-- LEFT: PERKS & INFO -->
+        <div>
+          <div class="join-perks" style="margin-top: 0;">
+            <div class="perk reveal tracer-rail">
+              <span class="tracer-line tracer-top"></span>
+              <span class="tracer-line tracer-right"></span>
+              <span class="tracer-line tracer-bottom"></span>
+              <span class="tracer-line tracer-left"></span>
+              <div class="perk-icon">✓</div>
+              <span>Full gym access for 7 days</span>
+            </div>
+            <div class="perk reveal tracer-rail">
+              <span class="tracer-line tracer-top"></span>
+              <span class="tracer-line tracer-right"></span>
+              <span class="tracer-line tracer-bottom"></span>
+              <span class="tracer-line tracer-left"></span>
+              <div class="perk-icon">✓</div>
+              <span>Unlimited group classes</span>
+            </div>
+            <div class="perk reveal tracer-rail">
+              <span class="tracer-line tracer-top"></span>
+              <span class="tracer-line tracer-right"></span>
+              <span class="tracer-line tracer-bottom"></span>
+              <span class="tracer-line tracer-left"></span>
+              <div class="perk-icon">✓</div>
+              <span>Free fitness assessment</span>
+            </div>
+          </div>
+
+          <div class="countdown-wrap reveal tracer-rail">
+            <span class="tracer-line tracer-top"></span>
+            <span class="tracer-line tracer-right"></span>
+            <span class="tracer-line tracer-bottom"></span>
+            <span class="tracer-line tracer-left"></span>
+            <div class="countdown-label">Trial offer expires in:</div>
+            <div class="countdown">
+              <div class="cd-block tracer-rail">
+                <span class="tracer-line tracer-top"></span>
+                <span class="tracer-line tracer-right"></span>
+                <span class="tracer-line tracer-bottom"></span>
+                <span class="tracer-line tracer-left"></span>
+                <div class="cd-num" data-cd="days">00</div>
+                <div class="cd-lbl">Days</div>
+              </div>
+              <div class="cd-block tracer-rail">
+                <span class="tracer-line tracer-top"></span>
+                <span class="tracer-line tracer-right"></span>
+                <span class="tracer-line tracer-bottom"></span>
+                <span class="tracer-line tracer-left"></span>
+                <div class="cd-num" data-cd="hrs">00</div>
+                <div class="cd-lbl">Hrs</div>
+              </div>
+              <div class="cd-block tracer-rail">
+                <span class="tracer-line tracer-top"></span>
+                <span class="tracer-line tracer-right"></span>
+                <span class="tracer-line tracer-bottom"></span>
+                <span class="tracer-line tracer-left"></span>
+                <div class="cd-num" data-cd="min">00</div>
+                <div class="cd-lbl">Min</div>
+              </div>
+              <div class="cd-block tracer-rail">
+                <span class="tracer-line tracer-top"></span>
+                <span class="tracer-line tracer-right"></span>
+                <span class="tracer-line tracer-bottom"></span>
+                <span class="tracer-line tracer-left"></span>
+                <div class="cd-num" data-cd="sec">00</div>
+                <div class="cd-lbl">Sec</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-list">
+            <div class="step reveal tracer-rail">
+              <span class="tracer-line tracer-top"></span>
+              <span class="tracer-line tracer-right"></span>
+              <span class="tracer-line tracer-bottom"></span>
+              <span class="tracer-line tracer-left"></span>
+              <div class="step-num">1</div>
+              <div>
+                <h4>Fill the Form</h4>
+                <p>Takes less than 2 minutes. No payment info needed.</p>
+              </div>
+            </div>
+            <div class="step reveal tracer-rail">
+              <span class="tracer-line tracer-top"></span>
+              <span class="tracer-line tracer-right"></span>
+              <span class="tracer-line tracer-bottom"></span>
+              <span class="tracer-line tracer-left"></span>
+              <div class="step-num">2</div>
+              <div>
+                <h4>Get Your Pass</h4>
+                <p>We'll email your digital access pass within the hour.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: FORM -->
+        <div class="reveal from-right join-form-wrapper">
+          <div class="hud-box tracer-rail" style="padding: 48px 40px; border-radius: 4px;">
+            <span class="tracer-line tracer-top"></span>
+            <span class="tracer-line tracer-right"></span>
+            <span class="tracer-line tracer-bottom"></span>
+            <span class="tracer-line tracer-left"></span>
+            <h3
+              style="font-family:var(--font-display);font-size:2rem;letter-spacing:.05em;color:var(--white);margin-bottom:6px;">
+              INITIALIZE ACCESS</h3>
+            <p style="font-size:.85rem;color:var(--muted);margin-bottom:32px;">Protocol active. Secure your performance
+              trajectory below.</p>
+
+            <form class="apex-form" novalidate>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div class="form-group">
+                  <label for="jfname">First Name</label>
+                  <input type="text" id="jfname" required placeholder="Alex">
+                </div>
+                <div class="form-group">
+                  <label for="jlname">Last Name</label>
+                  <input type="text" id="jlname" required placeholder="Johnson">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="jemail">Email Address</label>
+                <input type="email" id="jemail" required placeholder="alex@email.com">
+              </div>
+              <div class="form-group">
+                <label for="jphone">Phone Number</label>
+                <input type="tel" id="jphone" required placeholder="+1 555 000 0000">
+              </div>
+              <div class="form-group">
+                <label for="jgoal">Primary Goal</label>
+                <select id="jgoal" required>
+                  <option value="">Select your protocol...</option>
+                  <option>ALPHA PROTOCOL (Elite Athletic Performance)</option>
+                  <option>STRENGTH MATRIX (Body Composition)</option>
+                  <option>NEURAL-FORCE (Maximum Hypertrophy)</option>
+                  <option>KINETIC-FLOW (Functional Mobility)</option>
+                </select>
+              </div>
+              <div class="form-success">
+                <h3>Welcome to Apex!</h3>
+                <p style="font-size:.85rem;color:var(--muted)">Protocol initiated. Check your email for its pass.</p>
+              </div>
+              <button type="submit" class="submit-btn btn-kinetic" data-label="EXECUTE INITIALIZATION">EXECUTE
+                INITIALIZATION</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">APE<span style="color:var(--acid)">X</span></div>
+          <p style="margin-top:16px">Your transformation starts today.</p>
+          <div class="social-links" style="margin-top:24px"><a href="#" class="social-link">IG</a><a href="#"
+              class="social-link">YT</a><a href="#" class="social-link">TW</a></div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="trainers.html">Trainers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Membership</h4>
+          <ul>
+            <li><a href="membership.html">Plans</a></li>
+            <li><a href="join.html">Free Trial</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#">14 Iron Street</a></li>
+            <li><a href="tel:+15551234567">+1 555 123 4567</a></li>
+            <li><a href="#">Mon–Sun: 5AM–11PM</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Apex Performance Club. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // ── COUNTDOWN TIMER LOGIC ──
+    const initCountdown = () => {
+      // Set target to 7 days from now (or persistent date)
+      let targetDate = localStorage.getItem('apex_trial_target');
+      if (!targetDate) {
+        targetDate = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
+        localStorage.setItem('apex_trial_target', targetDate);
+      }
+
+      const updateTimer = () => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+          localStorage.removeItem('apex_trial_target');
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        const pad = (n) => n < 10 ? `0${n}` : n;
+
+        document.querySelectorAll('[data-cd="days"]').forEach(el => el.textContent = pad(days));
+        document.querySelectorAll('[data-cd="hrs"]').forEach(el => el.textContent = pad(hours));
+        document.querySelectorAll('[data-cd="min"]').forEach(el => el.textContent = pad(minutes));
+        document.querySelectorAll('[data-cd="sec"]').forEach(el => el.textContent = pad(seconds));
+      };
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    };
+
+    document.addEventListener('DOMContentLoaded', initCountdown);
+  </script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>
